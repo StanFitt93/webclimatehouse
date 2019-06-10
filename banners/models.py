@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from django.utils.timezone import now
 
 
 class Banner(models.Model):
@@ -18,3 +19,5 @@ class Banner(models.Model):
         return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.ban_img))
 
     image_tag.short_description = 'Image'
+
+
