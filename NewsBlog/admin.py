@@ -6,14 +6,14 @@ from .models import Category,News,Blog
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title']
-    fields = ['title']
+    list_display = ['title', 'slug']
+    fields = ['title', 'slug']
 
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ['date_news','title','category','news_img_show','is_active']
-    fields = ['title','category','description','paragraph','img_news','is_active','date_news']
+    list_display = ['date_news','title','category','news_img_show','is_active', 'slug_field']
+    fields = ['title','category','description','paragraph','img_news','is_active','date_news', 'slug_field']
     readonly_fields = ['news_img_show']
 
     def news_img_show(self,obj):
@@ -27,8 +27,8 @@ class NewsAdmin(admin.ModelAdmin):
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ['date_blog','title','category','is_active','blog_img_show']
-    fields = ['title','category','description','paragraph','img_blog','is_active','date_blog']
+    list_display = ['date_blog','title','category','is_active','blog_img_show', 'slug_field']
+    fields = ['title','category','description','paragraph','img_blog','is_active','date_blog', 'slug_field']
     readonly_fields = ['blog_img_show']
 
     def blog_img_show(self,obj):

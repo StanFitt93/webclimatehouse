@@ -22,7 +22,7 @@ class BrandAdminModel(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdminModel(admin.ModelAdmin):
-    list_display = ['title', 'category', 'brand', 'product_img', 'available', 'price']
+    list_display = ['title', 'category', 'brand', 'product_img', 'available', 'price', 'slug_field']
     fields = ['title',
               'category',
               'brand',
