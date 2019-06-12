@@ -17,9 +17,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(r'^admin/', admin.site.urls),
+    url(r'^', include('banners.urls')),
+    url(r'^', include('Catalog.urls')),
+    url(r'^', include('NewsBlog.urls')),
+    url(r'^', include('services.urls')),
+
+
+
 ]
 
 urlpatterns += [

@@ -10,6 +10,7 @@ from transliterate import translit
 class Category(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(blank=True,unique=True)
+    available_sale = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Категория'
