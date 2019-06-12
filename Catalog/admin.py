@@ -21,7 +21,7 @@ class BrandAdminModel(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class BrandAdminModel(admin.ModelAdmin):
+class ProductAdminModel(admin.ModelAdmin):
     list_display = ['title', 'category', 'brand', 'product_img', 'available', 'price']
     fields = ['title',
               'category',
@@ -34,7 +34,7 @@ class BrandAdminModel(admin.ModelAdmin):
               'description']
     readonly_fields = ['product_img_show']
 
-    def product_img_show(self,obj):
+    def product_img_show(self, obj):
         return mark_safe('<img src="{url}" width="150" height="100" />'.format(
             url=obj.product_img.url,
             width=obj.product_img.width,
@@ -43,7 +43,7 @@ class BrandAdminModel(admin.ModelAdmin):
         )
 
 
-
-
-
-admin.site.register(Category)
+@admin.register(Category)
+class CategoryAdminModel(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    fields = ['name', 'slug']
