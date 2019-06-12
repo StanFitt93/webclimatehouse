@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'banners.apps.BannersConfig',
     'NewsBlog.apps.NewsblogConfig',
     'services.apps.ServicesConfig',
+    'Catalog.apps.CatalogConfig',
 ]
 
 MIDDLEWARE = [
