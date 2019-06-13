@@ -18,19 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from home.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url('', home, name='home'),
     url(r'^', include('banners.urls')),
     url(r'^', include('Catalog.urls')),
     url(r'^', include('NewsBlog.urls')),
     url(r'^', include('services.urls')),
 
-
-
-
-]
-
-urlpatterns += [
-    # ... the rest of your URLconf goes here ...
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
