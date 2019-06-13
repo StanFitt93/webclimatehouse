@@ -8,6 +8,10 @@ from django.utils.text import slugify
 from future.types.newstr import unicode
 
 
+class ServiceManager(models.Manager):
+    def all(self,*args,**kwargs):
+        return super(ServiceManager, self).get_queryset().filter(is_active=True)
+
 class Service(models.Model):
     title       = models.CharField(max_length=200)
     description = models.TextField()
@@ -15,6 +19,7 @@ class Service(models.Model):
     s_img       = models.ImageField(upload_to='services/images')
     is_active   = models.BooleanField(default=False)
     slug        = models.SlugField(blank=True, unique=True)
+    objects     = ServiceManager()
 
     class Meta:
         verbose_name = 'Услуга'

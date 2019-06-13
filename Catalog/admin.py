@@ -45,5 +45,5 @@ class ProductAdminModel(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdminModel(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'available_sale']
-    fields = ['name', 'slug', 'available_sale']
+    list_display = ['name', 'slug', 'available']
+    fields = ['name', 'slug', 'available']
