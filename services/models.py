@@ -35,9 +35,8 @@ class Service(models.Model):
 
 
 def pre_save_service_slug(sender,instance,*args,**kwargs):
-    if not instance.slug:
-        slug_f = slugify(translit(unicode(instance.title),reversed=True))
-        instance.slug = slug_f
+    slug_f = slugify(translit(unicode(instance.title),reversed=True))
+    instance.slug = slug_f
 
 
 pre_save.connect(pre_save_service_slug,Service)
