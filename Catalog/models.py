@@ -9,12 +9,12 @@ from transliterate import translit
 
 class CategoryManager(models.Manager):
     def all(self,*args,**kwargs):
-        return super(CategoryManager,self).get_queryset().filter(available=True)
+        return super(CategoryManager, self).get_queryset().filter(available=True)
 
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(blank=True,unique=True)
+    slug = models.SlugField(blank=True, unique=True)
     available = models.BooleanField(default=False)
     objects = models.Manager()
 
@@ -34,9 +34,11 @@ def pre_save_category_slug(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_category_slug, sender=Category)
 
+
 class BrandManager(models.Manager):
     def all(self,*args,**kwargs):
-        return  super(BrandManager,self).get_queryset().filter(available=True)
+        return super(BrandManager, self).get_queryset().filter(available=True)
+
 
 class Brand(models.Model):
     name = models.CharField(max_length=200)
