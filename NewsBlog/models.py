@@ -28,6 +28,11 @@ def pre_save_category_slug(sender,instance,*args,**kwargs):
 pre_save.connect(pre_save_category_slug, sender=Category)
 
 
+class NewsManager(models.Manager):
+    def all(self,*args,**kwargs):
+        return super(NewsManager,self).get_queryset().filter(is_active=True)
+
+
 class News(models.Model):
     title = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
@@ -37,6 +42,7 @@ class News(models.Model):
     is_active = models.BooleanField(default=False)
     date_news = models.DateTimeField(default=now)
     slug_field = models.SlugField(blank=True,unique=True)
+    object = NewsManager()
 
     class Meta:
         verbose_name = 'Новость'
@@ -57,6 +63,10 @@ def pre_save_news_slug(sender,instance,*args,**kwargs):
 pre_save.connect(pre_save_news_slug,News)
 
 
+class BlogManager(models.Manager):
+    def all(self,*args,**kwargs):
+        return super(BlogManager,self).get_queryset().filter(is_active=True)
+
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
@@ -66,6 +76,7 @@ class Blog(models.Model):
     is_active = models.BooleanField(default=False)
     date_blog = models.DateTimeField(default=now)
     slug_field = models.SlugField(blank=True,unique=True)
+    objects = BlogManager()
 
     class Meta:
         verbose_name = 'Статья'
