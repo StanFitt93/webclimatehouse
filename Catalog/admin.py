@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, Brand, Product
+from .models import Category, Brand, Product, TypeOfSaleProduct
 # Register your models here.
 
 
@@ -22,7 +22,7 @@ class BrandAdminModel(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdminModel(admin.ModelAdmin):
-    list_display = ['title', 'category', 'brand', 'product_img', 'available', 'price', 'slug_field']
+    list_display = ['title', 'category', 'brand', 'product_img', 'available', 'price', 'slug_field', 'typeOfSale']
     fields = ['title',
               'category',
               'brand',
@@ -31,7 +31,9 @@ class ProductAdminModel(admin.ModelAdmin):
               'product_img_show',
               'available',
               'slug_field',
-              'description']
+              'description',
+              'typeOfSale'
+              ]
     readonly_fields = ['product_img_show']
 
     def product_img_show(self, obj):
@@ -47,3 +49,9 @@ class ProductAdminModel(admin.ModelAdmin):
 class CategoryAdminModel(admin.ModelAdmin):
     list_display = ['name', 'slug', 'available']
     fields = ['name', 'slug', 'available']
+
+
+@admin.register(TypeOfSaleProduct)
+class TypeOfSaleProductAdmin(admin.ModelAdmin):
+    list_display = ['title']
+    fields = ['title']

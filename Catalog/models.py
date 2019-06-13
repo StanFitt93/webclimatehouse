@@ -7,6 +7,17 @@ from future.types.newstr import unicode
 from transliterate import translit
 
 
+class TypeOfSaleProduct(models.Model):
+    title = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = 'Тип продажи'
+        verbose_name_plural = 'Типы продаж'
+
+    def __str__(self):
+        return self.title
+
+
 class CategoryManager(models.Manager):
     def all(self,*args,**kwargs):
         return super(CategoryManager, self).get_queryset().filter(available=True)
@@ -29,8 +40,6 @@ class Category(models.Model):
 def pre_save_category_slug(sender, instance, *args, **kwargs):
     slug = slugify(translit(unicode(instance.name), reversed=True))
     instance.slug = slug
-
-
 
 
 pre_save.connect(pre_save_category_slug, sender=Category)
@@ -75,6 +84,7 @@ class Product(models.Model):
     price       = models.DecimalField(max_digits=9,decimal_places=2)
     available   = models.BooleanField(default=False)
     objects     = ProductManager()
+    typeOfSale  = models.ForeignKey(TypeOfSaleProduct, on_delete=models.DO_NOTHING)
 
     class Meta:
         verbose_name= 'Товар'
