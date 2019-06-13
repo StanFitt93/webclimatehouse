@@ -27,12 +27,14 @@ class Category(models.Model):
 
 
 def pre_save_category_slug(sender, instance, *args, **kwargs):
-    if not instance.slug:
-        slug = slugify(translit(unicode(instance.name), reversed=True))
-        instance.slug = slug
+    slug = slugify(translit(unicode(instance.name), reversed=True))
+    instance.slug = slug
+
+
 
 
 pre_save.connect(pre_save_category_slug, sender=Category)
+
 
 class BrandManager(models.Manager):
     def all(self,*args,**kwargs):
@@ -87,9 +89,8 @@ class Product(models.Model):
 
 
 def pre_save_slug_product(sender,instance,*args,**kwargs):
-    if not instance.slug_field:
-        slug = slugify(translit(unicode(instance.title), reversed=True))
-        instance.slug_field = slug
+       slug = slugify(translit(unicode(instance.title), reversed=True))
+       instance.slug_field = slug
 
 
 pre_save.connect(pre_save_slug_product,Product)

@@ -20,9 +20,8 @@ class Category(models.Model):
         return self.title
 
 def pre_save_category_slug(sender,instance,*args,**kwargs):
-    if not instance.slug:
-        slug = slugify(translit(unicode(instance.title),reversed=True))
-        instance.slug = slug
+    slug = slugify(translit(unicode(instance.title),reversed=True))
+    instance.slug = slug
 
 
 pre_save.connect(pre_save_category_slug, sender=Category)
@@ -55,9 +54,8 @@ class News(models.Model):
 
 
 def pre_save_news_slug(sender,instance,*args,**kwargs):
-    if not instance.slug_field:
-        slug_field = slugify(translit(unicode(instance.title),reversed=True))
-        instance.slug_field = slug_field
+    slug_field = slugify(translit(unicode(instance.title),reversed=True))
+    instance.slug_field = slug_field
 
 
 pre_save.connect(pre_save_news_slug,News)
@@ -92,8 +90,7 @@ class Blog(models.Model):
 
 
 def pre_save_blog_slug(sender,intance,*args,**kwargs):
-    if not intance.slug_field:
-        slug_field = slugify(translit(unicode(intance.title), reversed=True))
-        intance.slug_field = slug_field
+    slug_field = slugify(translit(unicode(intance.title), reversed=True))
+    intance.slug_field = slug_field
 
 pre_save.connect(pre_save_blog_slug, sender=Blog)
