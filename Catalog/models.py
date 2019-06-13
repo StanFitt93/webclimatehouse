@@ -45,6 +45,30 @@ def pre_save_category_slug(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_category_slug, sender=Category)
 
 
+class SubcategoryManager(models.Manager):
+    def all(self,*args,**kwargs):
+        return super(SubcategoryManager, self).get_queryset().filter(available=True)
+
+
+class Subcategory(models.Model):
+    title = models.CharField(max_length=200)
+    available = models.BooleanField(default=False)
+    objects = SubcategoryManager()
+    main = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        verbose_name = 'Подкатегория'
+        verbose_name_plural = 'Подкатегории'
+
+    def __str__(self):
+        return  self.title
+
+
+
+
+
+
+
 class BrandManager(models.Manager):
     def all(self,*args,**kwargs):
         return super(BrandManager, self).get_queryset().filter(available=True)
@@ -76,6 +100,7 @@ class ProductManager(models.Manager):
 
 class Product(models.Model):
     category    = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+    
     brand       = models.ForeignKey(Brand, on_delete=models.DO_NOTHING)
     title       = models.CharField(max_length=200)
     slug_field  = models.SlugField(blank=True, unique=True)

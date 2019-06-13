@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, Brand, Product, TypeOfSaleProduct
+from .models import Category, Brand, Product, TypeOfSaleProduct, Subcategory
 # Register your models here.
 
 
@@ -55,3 +55,10 @@ class CategoryAdminModel(admin.ModelAdmin):
 class TypeOfSaleProductAdmin(admin.ModelAdmin):
     list_display = ['title']
     fields = ['title']
+
+
+@admin.register(Subcategory)
+class SubcategoryAdmin(admin.ModelAdmin):
+    list_display = ['title','available','main']
+    fields = ['title','available','main']
+
